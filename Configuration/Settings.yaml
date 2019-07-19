@@ -1,0 +1,7 @@
+Neos:
+  Neos:
+    Ui:
+      resources:
+        javascript:
+          "DIU.Neos.LinkEditor":
+            resource: '${"resource://DIU.Neos.LinkEditor/Public/JavaScript/LinkEditor/Plugin.js"}'

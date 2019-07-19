@@ -1,0 +1,19 @@
+{
+    "description": "",
+    "type": "neos-package",
+    "name": "diu/neos-linkeditor",
+    "require": {
+        "neos/neos": "*",
+        "neos/neos-ui": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "DIU\\Neos\\LinkEditor\\": "Classes/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "DIU.Neos.LinkEditor"
+        }
+    }
+}
