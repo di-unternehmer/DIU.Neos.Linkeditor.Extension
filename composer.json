@@ -1,5 +1,5 @@
 {
-    "description": "",
+    "description": "Extends the Neos CKE5 linkeditor with additional data attributes",
     "type": "neos-package",
     "name": "diu/neos-linkeditor",
     "require": {
