@@ -313,7 +313,7 @@ var LinkEditorPlugin = function (_Plugin) {
             editor.conversion.for("downcast").attributeToElement({
                 model: "location",
                 view: function view(location, writer) {
-                    var linkElement = writer.createAttributeElement("a", { "data-location": location }, { priority: 5 });
+                    var linkElement = writer.createAttributeElement("a", location ? { "data-location": location } : {}, { priority: 5 });
                     return linkElement;
                 }
             });
@@ -336,7 +336,7 @@ var LinkEditorPlugin = function (_Plugin) {
             editor.conversion.for("downcast").attributeToElement({
                 model: "category",
                 view: function view(category, writer) {
-                    var linkElement = writer.createAttributeElement("a", { "data-category": category }, { priority: 5 });
+                    var linkElement = writer.createAttributeElement("a", category ? { "data-category": category } : {}, { priority: 5 });
                     return linkElement;
                 }
             });
@@ -359,7 +359,7 @@ var LinkEditorPlugin = function (_Plugin) {
             editor.conversion.for("downcast").attributeToElement({
                 model: "interactiontype",
                 view: function view(interactiontype, writer) {
-                    var linkElement = writer.createAttributeElement("a", { "data-interactiontype": interactiontype }, { priority: 5 });
+                    var linkElement = writer.createAttributeElement("a", interactiontype ? { "data-interactiontype": interactiontype, "class": "js_eventTracking" } : {}, { priority: 5 });
                     return linkElement;
                 }
             });
@@ -376,6 +376,20 @@ var LinkEditorPlugin = function (_Plugin) {
                         return viewElement.getAttribute("data-interactiontype");
                     }
                 }
+            });
+
+            // entargeturipathsegment
+            editor.conversion.for("downcast").attributeToElement({
+                model: "linkHref",
+                view: function view(href, writer) {
+                    var linkElement = writer.createAttributeElement("a", {
+                        href: href,
+                        "data-entargeturipathsegment": href && href.replace(/:\/\//g, "_").replace(/\./g, "_").replace(/\//g, "_")
+                    }, { priority: 5 });
+                    writer.setCustomProperty('link', true, linkElement);
+                    return linkElement;
+                },
+                converterPriority: 'high'
             });
 
             editor.commands.add("location", new _linkAttributeCommand2.default(this.editor, "location"));

@@ -18,7 +18,7 @@ export default class LinkEditorPlugin extends Plugin {
             view: (location, writer) => {
                 const linkElement = writer.createAttributeElement(
                     "a",
-                    {"data-location": location},
+                    location ? {"data-location": location} : {},
                     {priority: 5}
                 );
                 return linkElement;
@@ -43,7 +43,7 @@ export default class LinkEditorPlugin extends Plugin {
             view: (category, writer) => {
                 const linkElement = writer.createAttributeElement(
                     "a",
-                    {"data-category": category},
+                    category ? {"data-category": category} : {},
                     {priority: 5}
                 );
                 return linkElement;
@@ -68,7 +68,7 @@ export default class LinkEditorPlugin extends Plugin {
             view: (interactiontype, writer) => {
                 const linkElement = writer.createAttributeElement(
                     "a",
-                    {"data-interactiontype": interactiontype},
+                    interactiontype ? {"data-interactiontype": interactiontype, "class": "js_eventTracking"} : {},
                     {priority: 5}
                 );
                 return linkElement;
@@ -86,6 +86,24 @@ export default class LinkEditorPlugin extends Plugin {
                 value: viewElement =>
                     viewElement.getAttribute("data-interactiontype")
             }
+        });
+
+        // entargeturipathsegment
+        editor.conversion.for("downcast").attributeToElement({
+            model: "linkHref",
+            view: (href, writer) => {
+                const linkElement = writer.createAttributeElement(
+                    "a",
+                    {
+                        href,
+                        "data-entargeturipathsegment": href && href.replace(/:\/\//g, "_").replace(/\./g, "_").replace(/\//g, "_")
+                    },
+                    {priority: 5}
+                );
+                writer.setCustomProperty('link', true, linkElement);
+                return linkElement;
+            },
+            converterPriority: 'high'
         });
 
         editor.commands.add(
