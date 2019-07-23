@@ -88,24 +88,6 @@ export default class LinkEditorPlugin extends Plugin {
             }
         });
 
-        // entargeturipathsegment
-        editor.conversion.for("downcast").attributeToElement({
-            model: "linkHref",
-            view: (href, writer) => {
-                const linkElement = writer.createAttributeElement(
-                    "a",
-                    {
-                        href,
-                        "data-entargeturipathsegment": href && href.replace(/:\/\//g, "_").replace(/\./g, "_").replace(/\//g, "_")
-                    },
-                    {priority: 5}
-                );
-                writer.setCustomProperty('link', true, linkElement);
-                return linkElement;
-            },
-            converterPriority: 'high'
-        });
-
         editor.commands.add(
             "location",
             new LinkAttributeCommand(this.editor, "location")

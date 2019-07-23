@@ -1,0 +1,6 @@
+prototype(DIU.Neos.LinkEditor:LinkProcessor) {
+    @class = 'DIU\\Neos\\LinkEditor\\Fusion\\LinkProcessorImplementation'
+    value = ${value}
+}
+
+prototype(Neos.Neos:ConvertUris).@process.linkProcessor = DIU.Neos.LinkEditor:LinkProcessor

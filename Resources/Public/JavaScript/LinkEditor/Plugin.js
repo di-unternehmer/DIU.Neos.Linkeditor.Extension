@@ -378,20 +378,6 @@ var LinkEditorPlugin = function (_Plugin) {
                 }
             });
 
-            // entargeturipathsegment
-            editor.conversion.for("downcast").attributeToElement({
-                model: "linkHref",
-                view: function view(href, writer) {
-                    var linkElement = writer.createAttributeElement("a", {
-                        href: href,
-                        "data-entargeturipathsegment": href && href.replace(/:\/\//g, "_").replace(/\./g, "_").replace(/\//g, "_")
-                    }, { priority: 5 });
-                    writer.setCustomProperty('link', true, linkElement);
-                    return linkElement;
-                },
-                converterPriority: 'high'
-            });
-
             editor.commands.add("location", new _linkAttributeCommand2.default(this.editor, "location"));
             editor.commands.add("category", new _linkAttributeCommand2.default(this.editor, "category"));
             editor.commands.add("interactiontype", new _linkAttributeCommand2.default(this.editor, "interactiontype"));

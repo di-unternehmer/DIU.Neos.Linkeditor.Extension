@@ -14,3 +14,5 @@ Enable additional linking options with such config:
             linking:
               linkEditor: true
 ```
+
+Additionally this package generates `data-enuripathsegment` attribute on all links via a Fusion processor.

@@ -1,5 +1,8 @@
 Neos:
   Neos:
+    fusion:
+      autoInclude:
+        DIU.Neos.LinkEditor: true
     Ui:
       resources:
         javascript:
