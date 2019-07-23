@@ -88,7 +88,7 @@ const interactiontypeOptions = [
 export default class LinkEditorOptions extends PureComponent {
     static propTypes = {
         formattingUnderCursor: PropTypes.object,
-        options: PropTypes.object
+        linkingOptions: PropTypes.object
     };
 
     getLocation() {
@@ -102,7 +102,7 @@ export default class LinkEditorOptions extends PureComponent {
     }
 
     render() {
-        return $get('linkEditor', this.props.options) && (
+        return $get('linkEditor', this.props.linkingOptions) && (
             <div style={{flexGrow: 1}}>
                 <div style={{padding: 8}}>
                     Interaction Type
