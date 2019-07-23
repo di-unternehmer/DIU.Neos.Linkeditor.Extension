@@ -16,3 +16,14 @@ Enable additional linking options with such config:
 ```
 
 Additionally this package generates `data-enuripathsegment` attribute on all links via a Fusion processor.
+
+## Development
+
+If you need to adjust anything in this package, just do so and then rebuild the code like this:
+
+```
+cd Resources/Private/LinkEditor
+yarn && yarn build
+```
+
+And then commit changed filed including Plugin.js
