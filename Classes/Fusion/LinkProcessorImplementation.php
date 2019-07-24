@@ -26,11 +26,8 @@ class LinkProcessorImplementation extends AbstractFusionObject
             "/(<a.+?href=\")(.+?)\"/i",
             function($m) {
                 $href = $m[2];
-                $href = str_replace("://", "_", $href);
-                $href = str_replace(":", "_", $href);
-                $href = str_replace("/", "_", $href);
-                $res = $m[1] . $m[2] . '" data-enuripathsegment="' . $href . '" ';
-                return $res;
+                $href = str_replace(array("://", ".", "/", "#"), "_", $href);
+                return $m[1] . $m[2] . '" data-enuripathsegment="' . $href . '" ';
             },
             $text
         );

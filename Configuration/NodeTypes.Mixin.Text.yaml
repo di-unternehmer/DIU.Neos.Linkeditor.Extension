@@ -1,0 +1,8 @@
+'Neos.NodeTypes.BaseMixins:TextMixin':
+  properties:
+    text:
+      ui:
+        inline:
+          editorOptions:
+            linking:
+              linkEditor: true
