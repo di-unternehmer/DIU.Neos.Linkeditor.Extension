@@ -89,8 +89,7 @@ class LinkProcessorImplementation extends AbstractFusionObject
                     throw new \Exception(sprintf('Only strings can be processed by this Fusion object, given: "%s".', gettype($enUriPathSegment)), 1382624080);
                 }
 
-                $trackingAttributes = $enUriPathSegment !== '' ? ' data-location="content" data-category="click" data-interactionType="link"' : '';
-                return $m[1] . $m[2] . '" data-enuripathsegment="' . $enUriPathSegment . '"' . $trackingAttributes;
+                return $m[1] . $m[2] . '" data-enuripathsegment="' . $enUriPathSegment . '"';
             },
             $text
         );
