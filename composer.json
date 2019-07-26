@@ -2,6 +2,7 @@
     "description": "Extends the Neos CKE5 linkeditor with additional data attributes",
     "type": "neos-package",
     "name": "diu/neos-linkeditor",
+    "license": "MIT",
     "require": {
         "neos/neos": "*",
         "neos/neos-ui": "^3.8",
