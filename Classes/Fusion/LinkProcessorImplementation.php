@@ -2,6 +2,7 @@
 namespace DIU\Neos\LinkEditor\Fusion;
 
 use Neos\ContentRepository\Domain\Model\NodeInterface;
+use Neos\ContentRepository\Domain\Service\Context;
 use Neos\Flow\Annotations as Flow;
 use Neos\Fusion\FusionObjects\AbstractFusionObject;
 use Neos\Neos\Fusion\Helper\LinkHelper;
@@ -42,13 +43,12 @@ class LinkProcessorImplementation extends AbstractFusionObject
         return preg_replace_callback(
             "/(<a.+?href=\")(.+?)\"/i",
             function($m) {
-                $nodeContext = $this->fusionValue('node');
                 $href = $m[2];
 
-                // get english URL path segment for nodes
-                $originNode = $this->linkingHelper->convertUriToObject($href,$nodeContext);
-                if ($originNode && $originNode instanceof NodeInterface) {
+                if (strpos($href, 'node://') === 0) {
+                    $nodePartials = explode('node://', $href);
                     //Create an english context
+                    /** @var Context $enContext */
                     $enContext = $this->contextFactory->create([
                         'dimensions' => [
                             'language' => ['en'],
@@ -60,13 +60,24 @@ class LinkProcessorImplementation extends AbstractFusionObject
                         ]
                     ]);
 
-                    $query = new FlowQuery([$enContext->getCurrentSiteNode()]);
-                    /** @var NodeInterface $enNode */
-                    $enNode = $query->find($originNode)->get(0);
-                    $enUriPathSegment = $enNode->getProperty('uriPathSegment');
+                    /** @var NodeInterface $enTargetNode */
+                    $enTargetNode = $enContext->getNodeByIdentifier($nodePartials[1]);
+
+                    if ($enTargetNode === null) {
+                        /** @var NodeInterface $currentNode */
+                        $currentNode = $this->fusionValue('node');
+                        $currentContext = $currentNode->getContext();
+                        /** @var NodeInterface $enTargetNode */
+                        $enTargetNode = $currentContext->getNodeByIdentifier($nodePartials[1]);
+                    }
+
+                    $enUriPathSegment = $enTargetNode->getProperty('uriPathSegment');
+                }
+                else if(strpos($href, 'asset://') === 0){
+                    $enUriPathSegment = '';
                 }
                 // apply pregReplace to external URLs
-                else if(is_null($originNode)){
+                else{
                     $pattern = '/(\.)|(:\/\/)|(\/)|(#)/';
                     $string = explode('?', $href,2)[0];
                     $enUriPathSegment =  preg_replace($pattern, '_', $string);
@@ -78,7 +89,8 @@ class LinkProcessorImplementation extends AbstractFusionObject
                     throw new \Exception(sprintf('Only strings can be processed by this Fusion object, given: "%s".', gettype($enUriPathSegment)), 1382624080);
                 }
 
-                return $m[1] . $m[2] . '" data-enuripathsegment="' . $enUriPathSegment . '" ';
+                $trackingAttributes = $enUriPathSegment !== '' ? ' data-location="content" data-category="click" data-interactionType="link"' : '';
+                return $m[1] . $m[2] . '" data-enuripathsegment="' . $enUriPathSegment . '"' . $trackingAttributes;
             },
             $text
         );
