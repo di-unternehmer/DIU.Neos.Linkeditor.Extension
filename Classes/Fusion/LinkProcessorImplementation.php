@@ -45,9 +45,9 @@ class LinkProcessorImplementation extends AbstractFusionObject
                 $nodeContext = $this->fusionValue('node');
                 $href = $m[2];
 
-                xdebug_break();
+                // get english URL path segment for nodes
                 $originNode = $this->linkingHelper->convertUriToObject($href,$nodeContext);
-                if ($originNode) {
+                if ($originNode && $originNode instanceof NodeInterface) {
                     //Create an english context
                     $enContext = $this->contextFactory->create([
                         'dimensions' => [
@@ -65,7 +65,13 @@ class LinkProcessorImplementation extends AbstractFusionObject
                     $enNode = $query->find($originNode)->get(0);
                     $enUriPathSegment = $enNode->getProperty('uriPathSegment');
                 }
+                // apply pregReplace to external URLs
+                else if(is_null($originNode)){
+                    $pattern = '/(\.)|(:\/\/)|(\/)|(#)/';
+                    $string = explode('?', $href,2)[0];
+                    $enUriPathSegment =  preg_replace($pattern, '_', $string);
 
+                }
 
 
                 if (!is_string($enUriPathSegment)) {
