@@ -44,7 +44,6 @@ class LinkProcessorImplementation extends AbstractFusionObject
             "/(<a.+?href=\")(.+?)\"/i",
             function($m) {
                 $href = $m[2];
-
                 if (strpos($href, 'node://') === 0) {
                     $nodePartials = explode('node://', $href);
                     //Create an english context
@@ -66,9 +65,13 @@ class LinkProcessorImplementation extends AbstractFusionObject
                     if ($enTargetNode === null) {
                         /** @var NodeInterface $currentNode */
                         $currentNode = $this->fusionValue('node');
-                        $currentContext = $currentNode->getContext();
-                        /** @var NodeInterface $enTargetNode */
-                        $enTargetNode = $currentContext->getNodeByIdentifier($nodePartials[1]);
+                        if($currentNode !== null) {
+                            $currentContext = $currentNode->getContext();
+                            /** @var NodeInterface $enTargetNode */
+                            $enTargetNode = $currentContext->getNodeByIdentifier($nodePartials[1]);
+                        }else{
+                            return $m[1] . $m[2] . '"';
+                        }
                     }
 
                     $enUriPathSegment = $enTargetNode->getProperty('uriPathSegment');
