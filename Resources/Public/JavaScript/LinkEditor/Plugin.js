@@ -670,7 +670,7 @@ var LinkEditorOptions = (_dec = (0, _reactRedux.connect)((0, _plowJs.$transform)
     }, {
         key: "render",
         value: function render() {
-            return (0, _plowJs.$get)('linkEditor', this.props.linkingOptions) && _react2.default.createElement(
+            return (0, _plowJs.$get)('linkEditor', this.props.linkingOptions) ? _react2.default.createElement(
                 "div",
                 { style: { flexGrow: 1 } },
                 _react2.default.createElement(
@@ -718,7 +718,7 @@ var LinkEditorOptions = (_dec = (0, _reactRedux.connect)((0, _plowJs.$transform)
                         allowEmpty: true
                     })
                 )
-            );
+            ) : null;
         }
     }]);
 

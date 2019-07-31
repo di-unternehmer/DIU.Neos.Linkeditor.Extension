@@ -45,7 +45,7 @@ export default class LinkEditorOptions extends PureComponent {
     }
 
     render() {
-        return $get('linkEditor', this.props.linkingOptions) && (
+        return $get('linkEditor', this.props.linkingOptions) ? (
             <div style={{flexGrow: 1}}>
                 <div style={{padding: 8}}>
                     Interaction Type
@@ -87,6 +87,6 @@ export default class LinkEditorOptions extends PureComponent {
                     />
                 </div>
             </div>
-        );
+        ) : null;
     }
 }
