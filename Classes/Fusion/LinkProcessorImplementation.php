@@ -50,12 +50,10 @@ class LinkProcessorImplementation extends AbstractFusionObject
                     /** @var Context $enContext */
                     $enContext = $this->contextFactory->create([
                         'dimensions' => [
-                            'language' => ['en'],
-                            'country' => ['int']
+                            'language' => ['en']
                         ],
                         'targetDimensions' => [
-                            'language' => 'en',
-                            'country' => 'int'
+                            'language' => 'en'
                         ]
                     ]);
 
