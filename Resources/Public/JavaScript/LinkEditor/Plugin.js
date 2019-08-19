@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -108,6 +108,34 @@ module.exports = (0, _readFromConsumerApi2.default)('vendor')().CkEditor5;
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = findLinkRange;
+function findLinkRange(position, value, model) {
+    return model.createRange(_findBound(position, value, true, model), _findBound(position, value, false, model));
+}
+
+function _findBound(position, value, lookBack, model) {
+    var node = position.textNode || (lookBack ? position.nodeBefore : position.nodeAfter);
+
+    var lastNode = null;
+
+    while (node && node.getAttribute("linkHref") == value) {
+        lastNode = node;
+        node = lookBack ? node.previousSibling : node.nextSibling;
+    }
+
+    return lastNode ? model.createPositionAt(lastNode, lookBack ? "before" : "after") : position;
+}
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 var _readFromConsumerApi = __webpack_require__(0);
 
 var _readFromConsumerApi2 = _interopRequireDefault(_readFromConsumerApi);
@@ -117,26 +145,26 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = (0, _readFromConsumerApi2.default)('vendor')().plow;
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-__webpack_require__(4);
-
-/***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _neosUiExtensibility = __webpack_require__(5);
+__webpack_require__(5);
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _neosUiExtensibility = __webpack_require__(6);
 
 var _neosUiExtensibility2 = _interopRequireDefault(_neosUiExtensibility);
 
-var _linkEditorPlugin = __webpack_require__(9);
+var _linkEditorPlugin = __webpack_require__(10);
 
 var _linkEditorPlugin2 = _interopRequireDefault(_linkEditorPlugin);
 
@@ -144,7 +172,7 @@ var _LinkEditorOptions = __webpack_require__(13);
 
 var _LinkEditorOptions2 = _interopRequireDefault(_LinkEditorOptions);
 
-var _plowJs = __webpack_require__(2);
+var _plowJs = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -170,7 +198,7 @@ var addPlugin = function addPlugin(Plugin, isEnabled) {
 });
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -181,7 +209,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.createConsumerApi = undefined;
 
-var _createConsumerApi = __webpack_require__(6);
+var _createConsumerApi = __webpack_require__(7);
 
 var _createConsumerApi2 = _interopRequireDefault(_createConsumerApi);
 
@@ -195,7 +223,7 @@ exports.default = (0, _readFromConsumerApi2.default)('manifest');
 exports.createConsumerApi = _createConsumerApi2.default;
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -206,9 +234,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = createConsumerApi;
 
-var _package = __webpack_require__(7);
+var _package = __webpack_require__(8);
 
-var _manifest = __webpack_require__(8);
+var _manifest = __webpack_require__(9);
 
 var _manifest2 = _interopRequireDefault(_manifest);
 
@@ -237,13 +265,13 @@ function createConsumerApi(manifests, exposureMap) {
 }
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 module.exports = {"name":"@neos-project/neos-ui-extensibility","version":"1.4.1","description":"Extensibility mechanisms for the Neos CMS UI","main":"./src/index.js","scripts":{"prebuild":"check-dependencies && yarn clean","test":"yarn jest -- -w 2 --coverage","test:watch":"yarn jest -- --watch","build":"exit 0","build:watch":"exit 0","clean":"rimraf ./lib ./dist","lint":"eslint src","jest":"NODE_ENV=test jest"},"devDependencies":{"@neos-project/babel-preset-neos-ui":"1.4.1","@neos-project/jest-preset-neos-ui":"1.4.1"},"dependencies":{"@neos-project/build-essentials":"1.4.1","@neos-project/positional-array-sorter":"1.4.1","babel-core":"^6.13.2","babel-eslint":"^7.1.1","babel-loader":"^7.1.2","babel-plugin-transform-decorators-legacy":"^1.3.4","babel-plugin-transform-object-rest-spread":"^6.20.1","babel-plugin-webpack-alias":"^2.1.1","babel-preset-es2015":"^6.13.2","babel-preset-react":"^6.3.13","babel-preset-stage-0":"^6.3.13","chalk":"^1.1.3","css-loader":"^0.28.4","file-loader":"^1.1.5","json-loader":"^0.5.4","postcss-loader":"^2.0.10","react-dev-utils":"^0.5.0","style-loader":"^0.21.0"},"bin":{"neos-react-scripts":"./bin/neos-react-scripts.js"},"jest":{"preset":"@neos-project/jest-preset-neos-ui"}}
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -265,7 +293,7 @@ exports.default = function (manifests) {
 };
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -280,9 +308,13 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _ckeditor5Exports = __webpack_require__(1);
 
-var _linkAttributeCommand = __webpack_require__(10);
+var _linkAttributeCommand = __webpack_require__(11);
 
 var _linkAttributeCommand2 = _interopRequireDefault(_linkAttributeCommand);
+
+var _removeAttributeCommand = __webpack_require__(20);
+
+var _removeAttributeCommand2 = _interopRequireDefault(_removeAttributeCommand);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -307,6 +339,12 @@ var LinkEditorPlugin = function (_Plugin) {
             var editor = this.editor;
             editor.model.schema.extend("$text", {
                 allowAttributes: ["location", "category", "interactiontype"]
+            });
+
+            this.editor.commands.get("unlink").on("execute", function (evt, args) {
+                editor.execute("removeCategory");
+                editor.execute("removeLocation");
+                editor.execute("removeInteractiontype");
             });
 
             // location
@@ -381,6 +419,9 @@ var LinkEditorPlugin = function (_Plugin) {
             editor.commands.add("location", new _linkAttributeCommand2.default(this.editor, "location"));
             editor.commands.add("category", new _linkAttributeCommand2.default(this.editor, "category"));
             editor.commands.add("interactiontype", new _linkAttributeCommand2.default(this.editor, "interactiontype"));
+            editor.commands.add("removeLocation", new _removeAttributeCommand2.default(this.editor, "location"));
+            editor.commands.add("removeCategory", new _removeAttributeCommand2.default(this.editor, "category"));
+            editor.commands.add("removeInteractiontype", new _removeAttributeCommand2.default(this.editor, "interactiontype"));
         }
     }], [{
         key: "pluginName",
@@ -395,7 +436,7 @@ var LinkEditorPlugin = function (_Plugin) {
 exports.default = LinkEditorPlugin;
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -410,7 +451,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _ckeditor5Exports = __webpack_require__(1);
 
-var _findLinkRange = __webpack_require__(11);
+var _findLinkRange = __webpack_require__(2);
 
 var _findLinkRange2 = _interopRequireDefault(_findLinkRange);
 
@@ -545,34 +586,6 @@ var LinkAttributeCommand = function (_Command) {
 exports.default = LinkAttributeCommand;
 
 /***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = findLinkRange;
-function findLinkRange(position, value, model) {
-    return model.createRange(_findBound(position, value, true, model), _findBound(position, value, false, model));
-}
-
-function _findBound(position, value, lookBack, model) {
-    var node = position.textNode || (lookBack ? position.nodeBefore : position.nodeAfter);
-
-    var lastNode = null;
-
-    while (node && node.getAttribute("linkHref") == value) {
-        lastNode = node;
-        node = lookBack ? node.previousSibling : node.nextSibling;
-    }
-
-    return lastNode ? model.createPositionAt(lastNode, lookBack ? "before" : "after") : position;
-}
-
-/***/ }),
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -619,7 +632,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRedux = __webpack_require__(16);
 
-var _plowJs = __webpack_require__(2);
+var _plowJs = __webpack_require__(3);
 
 var _reactUiComponents = __webpack_require__(17);
 
@@ -818,6 +831,112 @@ var _readFromConsumerApi2 = _interopRequireDefault(_readFromConsumerApi);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = (0, _readFromConsumerApi2.default)('NeosProjectPackages')().NeosUiReduxStore;
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _ckeditor5Exports = __webpack_require__(1);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _findRange(position, value, model, attributeKey) {
+    return model.createRange(_findBound(position, value, true, model, attributeKey), _findBound(position, value, false, model, attributeKey));
+}
+
+function _findBound(position, value, lookBack, model, attributeKey) {
+    var node = position.textNode || (lookBack ? position.nodeBefore : position.nodeAfter);
+
+    var lastNode = null;
+
+    while (node && node.getAttribute(attributeKey) == value) {
+        lastNode = node;
+        node = lookBack ? node.previousSibling : node.nextSibling;
+    }
+
+    return lastNode ? model.createPositionAt(lastNode, lookBack ? "before" : "after") : position;
+}
+
+var RemoveAttributeCommand = function (_Command) {
+    _inherits(RemoveAttributeCommand, _Command);
+
+    function RemoveAttributeCommand(editor, attributeKey) {
+        _classCallCheck(this, RemoveAttributeCommand);
+
+        var _this = _possibleConstructorReturn(this, (RemoveAttributeCommand.__proto__ || Object.getPrototypeOf(RemoveAttributeCommand)).call(this, editor));
+
+        _this.attributeKey = attributeKey;
+        return _this;
+    }
+
+    _createClass(RemoveAttributeCommand, [{
+        key: "refresh",
+        value: function refresh() {
+            var model = this.editor.model;
+            var doc = model.document;
+
+            this.value = doc.selection.getAttribute(this.attributeKey);
+            this.isEnabled = model.schema.checkAttributeInSelection(doc.selection, this.attributeKey);
+        }
+    }, {
+        key: "execute",
+        value: function execute(value) {
+            var _this2 = this;
+
+            var model = this.editor.model;
+            var doc = model.document;
+            var selection = doc.selection;
+            var toggleMode = value === undefined;
+            value = toggleMode ? !this.value : value;
+
+            model.change(function (writer) {
+                var rangesToUnset = selection.isCollapsed ? [_findRange(selection.getFirstPosition(), selection.getAttribute(_this2.attributeKey), model, _this2.attributeKey)] : selection.getRanges();
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = rangesToUnset[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var range = _step.value;
+
+                        writer.removeAttribute(_this2.attributeKey, range);
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+            });
+        }
+    }]);
+
+    return RemoveAttributeCommand;
+}(_ckeditor5Exports.Command);
+
+exports.default = RemoveAttributeCommand;
 
 /***/ })
 /******/ ]);

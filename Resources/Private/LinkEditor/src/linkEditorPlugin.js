@@ -1,5 +1,6 @@
 import {Plugin} from "ckeditor5-exports";
 import LinkAttributeCommand from "./linkAttributeCommand";
+import RemoveAttributeCommand from "./removeAttributeCommand";
 
 export default class LinkEditorPlugin extends Plugin {
     static get pluginName() {
@@ -10,6 +11,12 @@ export default class LinkEditorPlugin extends Plugin {
         const editor = this.editor;
         editor.model.schema.extend("$text", {
             allowAttributes: ["location", "category", "interactiontype"]
+        });
+
+        this.editor.commands.get("unlink").on("execute", ( evt, args ) => {
+            editor.execute("removeCategory");
+            editor.execute("removeLocation");
+            editor.execute("removeInteractiontype");
         });
 
         // location
@@ -99,6 +106,18 @@ export default class LinkEditorPlugin extends Plugin {
         editor.commands.add(
             "interactiontype",
             new LinkAttributeCommand(this.editor, "interactiontype")
+        );
+        editor.commands.add(
+            "removeLocation",
+            new RemoveAttributeCommand(this.editor, "location")
+        );
+        editor.commands.add(
+            "removeCategory",
+            new RemoveAttributeCommand(this.editor, "category")
+        );
+        editor.commands.add(
+            "removeInteractiontype",
+            new RemoveAttributeCommand(this.editor, "interactiontype")
         );
     }
 }
