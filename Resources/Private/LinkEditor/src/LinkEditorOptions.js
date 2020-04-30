@@ -18,11 +18,6 @@ const locationOptions = [
     {group: 'baz', label: 'baz'},
 ];
 
-const interactiontypeOptions = [
-    {group: 'foo', label: 'bar'},
-    {group: 'baz', label: 'baz'},
-]
-
 @connect(
     $transform({
         formattingUnderCursor: selectors.UI.ContentCanvas.formattingUnderCursor
@@ -34,6 +29,19 @@ export default class LinkEditorOptions extends PureComponent {
         linkingOptions: PropTypes.object
     };
 
+    state = {
+        options: [],
+        loading: false,
+        error: false
+    };
+
+    fetchCache = null;
+
+    componentDidMount() {
+        this.setState({ loading: true, error: false });
+        this.fetchOptions();
+    }
+
     getLocation() {
         return $get("location", this.props.formattingUnderCursor) || "";
     }
@@ -44,13 +52,34 @@ export default class LinkEditorOptions extends PureComponent {
         return $get("interactiontype", this.props.formattingUnderCursor) || "";
     }
 
+    fetchOptions = () => {
+        if (!this.fetchCache) {
+            this.fetchCache = fetch(
+                // REPLACE WITH REAL URL
+                "/_Resources/Static/test.json",
+                { credentials: "include" }
+            ).then((response) => response.json())
+            .then(response => Object.values(response));
+        }
+        this.fetchCache
+            .then((options) =>
+                this.setState({ options, loading: false, error: false })
+            )
+            .catch((reason) => {
+                console.error(reason);
+                // Clear cache on error
+                this.fetchCache = undefined;
+                this.setState({ error: true, loading: false });
+            });
+      };
+
     render() {
         return $get('linkEditor', this.props.linkingOptions) ? (
             <div style={{flexGrow: 1}}>
                 <div style={{padding: 8}}>
                     Interaction Type
                     <SelectBox
-                        options={interactiontypeOptions}
+                        options={this.state.options}
                         optionValueField="label"
                         value={this.getInteractiontype()}
                         onValueChange={value => {
@@ -58,6 +87,7 @@ export default class LinkEditorOptions extends PureComponent {
                         }}
                         placeholder="Choose interactiontype"
                         allowEmpty={true}
+                        displayLoadingIndicator={this.state.loading}
                     />
                 </div>
                 <div style={{padding: 8}}>
