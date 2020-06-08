@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -108,34 +108,6 @@ module.exports = (0, _readFromConsumerApi2.default)('vendor')().CkEditor5;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = findLinkRange;
-function findLinkRange(position, value, model) {
-    return model.createRange(_findBound(position, value, true, model), _findBound(position, value, false, model));
-}
-
-function _findBound(position, value, lookBack, model) {
-    var node = position.textNode || (lookBack ? position.nodeBefore : position.nodeAfter);
-
-    var lastNode = null;
-
-    while (node && node.getAttribute("linkHref") == value) {
-        lastNode = node;
-        node = lookBack ? node.previousSibling : node.nextSibling;
-    }
-
-    return lastNode ? model.createPositionAt(lastNode, lookBack ? "before" : "after") : position;
-}
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
 var _readFromConsumerApi = __webpack_require__(0);
 
 var _readFromConsumerApi2 = _interopRequireDefault(_readFromConsumerApi);
@@ -145,34 +117,34 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = (0, _readFromConsumerApi2.default)('vendor')().plow;
 
 /***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+__webpack_require__(4);
+
+/***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(5);
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _neosUiExtensibility = __webpack_require__(6);
+var _neosUiExtensibility = __webpack_require__(5);
 
 var _neosUiExtensibility2 = _interopRequireDefault(_neosUiExtensibility);
 
-var _linkEditorPlugin = __webpack_require__(10);
+var _linkEditorPlugin = __webpack_require__(9);
 
 var _linkEditorPlugin2 = _interopRequireDefault(_linkEditorPlugin);
 
-var _LinkEditorOptions = __webpack_require__(13);
+var _LinkEditorOptions = __webpack_require__(14);
 
 var _LinkEditorOptions2 = _interopRequireDefault(_LinkEditorOptions);
 
-var _plowJs = __webpack_require__(3);
+var _plowJs = __webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -198,7 +170,7 @@ var addPlugin = function addPlugin(Plugin, isEnabled) {
 });
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -209,7 +181,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.createConsumerApi = undefined;
 
-var _createConsumerApi = __webpack_require__(7);
+var _createConsumerApi = __webpack_require__(6);
 
 var _createConsumerApi2 = _interopRequireDefault(_createConsumerApi);
 
@@ -223,7 +195,7 @@ exports.default = (0, _readFromConsumerApi2.default)('manifest');
 exports.createConsumerApi = _createConsumerApi2.default;
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -234,9 +206,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = createConsumerApi;
 
-var _package = __webpack_require__(8);
+var _package = __webpack_require__(7);
 
-var _manifest = __webpack_require__(9);
+var _manifest = __webpack_require__(8);
 
 var _manifest2 = _interopRequireDefault(_manifest);
 
@@ -265,13 +237,13 @@ function createConsumerApi(manifests, exposureMap) {
 }
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports) {
 
 module.exports = {"name":"@neos-project/neos-ui-extensibility","version":"1.4.1","description":"Extensibility mechanisms for the Neos CMS UI","main":"./src/index.js","scripts":{"prebuild":"check-dependencies && yarn clean","test":"yarn jest -- -w 2 --coverage","test:watch":"yarn jest -- --watch","build":"exit 0","build:watch":"exit 0","clean":"rimraf ./lib ./dist","lint":"eslint src","jest":"NODE_ENV=test jest"},"devDependencies":{"@neos-project/babel-preset-neos-ui":"1.4.1","@neos-project/jest-preset-neos-ui":"1.4.1"},"dependencies":{"@neos-project/build-essentials":"1.4.1","@neos-project/positional-array-sorter":"1.4.1","babel-core":"^6.13.2","babel-eslint":"^7.1.1","babel-loader":"^7.1.2","babel-plugin-transform-decorators-legacy":"^1.3.4","babel-plugin-transform-object-rest-spread":"^6.20.1","babel-plugin-webpack-alias":"^2.1.1","babel-preset-es2015":"^6.13.2","babel-preset-react":"^6.3.13","babel-preset-stage-0":"^6.3.13","chalk":"^1.1.3","css-loader":"^0.28.4","file-loader":"^1.1.5","json-loader":"^0.5.4","postcss-loader":"^2.0.10","react-dev-utils":"^0.5.0","style-loader":"^0.21.0"},"bin":{"neos-react-scripts":"./bin/neos-react-scripts.js"},"jest":{"preset":"@neos-project/jest-preset-neos-ui"}}
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -293,7 +265,7 @@ exports.default = function (manifests) {
 };
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -308,11 +280,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _ckeditor5Exports = __webpack_require__(1);
 
-var _linkAttributeCommand = __webpack_require__(11);
+var _linkAttributeCommand = __webpack_require__(10);
 
 var _linkAttributeCommand2 = _interopRequireDefault(_linkAttributeCommand);
 
-var _removeAttributeCommand = __webpack_require__(20);
+var _removeAttributeCommand = __webpack_require__(13);
 
 var _removeAttributeCommand2 = _interopRequireDefault(_removeAttributeCommand);
 
@@ -436,7 +408,7 @@ var LinkEditorPlugin = function (_Plugin) {
 exports.default = LinkEditorPlugin;
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -451,7 +423,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _ckeditor5Exports = __webpack_require__(1);
 
-var _findLinkRange = __webpack_require__(2);
+var _findLinkRange = __webpack_require__(11);
 
 var _findLinkRange2 = _interopRequireDefault(_findLinkRange);
 
@@ -586,6 +558,34 @@ var LinkAttributeCommand = function (_Command) {
 exports.default = LinkAttributeCommand;
 
 /***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = findLinkRange;
+function findLinkRange(position, value, model) {
+    return model.createRange(_findBound(position, value, true, model), _findBound(position, value, false, model));
+}
+
+function _findBound(position, value, lookBack, model) {
+    var node = position.textNode || (lookBack ? position.nodeBefore : position.nodeAfter);
+
+    var lastNode = null;
+
+    while (node && node.getAttribute("linkHref") == value) {
+        lastNode = node;
+        node = lookBack ? node.previousSibling : node.nextSibling;
+    }
+
+    return lastNode ? model.createPositionAt(lastNode, lookBack ? "before" : "after") : position;
+}
+
+/***/ }),
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -608,232 +608,6 @@ function objectToMap(obj) {
 
 /***/ }),
 /* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _dec, _class, _class2, _temp;
-
-var _react = __webpack_require__(14);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(15);
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _reactRedux = __webpack_require__(16);
-
-var _plowJs = __webpack_require__(3);
-
-var _reactUiComponents = __webpack_require__(17);
-
-var _neosUiCkeditor5Bindings = __webpack_require__(18);
-
-var _neosUiReduxStore = __webpack_require__(19);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var categoryOptions = [{ group: 'foo', label: 'bar' }, { group: 'baz', label: 'baz' }];
-
-var locationOptions = [{ group: 'foo', label: 'bar' }, { group: 'baz', label: 'baz' }];
-
-var interactiontypeOptions = [{ group: 'foo', label: 'bar' }, { group: 'baz', label: 'baz' }];
-
-var LinkEditorOptions = (_dec = (0, _reactRedux.connect)((0, _plowJs.$transform)({
-    formattingUnderCursor: _neosUiReduxStore.selectors.UI.ContentCanvas.formattingUnderCursor
-})), _dec(_class = (_temp = _class2 = function (_PureComponent) {
-    _inherits(LinkEditorOptions, _PureComponent);
-
-    function LinkEditorOptions() {
-        _classCallCheck(this, LinkEditorOptions);
-
-        return _possibleConstructorReturn(this, (LinkEditorOptions.__proto__ || Object.getPrototypeOf(LinkEditorOptions)).apply(this, arguments));
-    }
-
-    _createClass(LinkEditorOptions, [{
-        key: "getLocation",
-        value: function getLocation() {
-            return (0, _plowJs.$get)("location", this.props.formattingUnderCursor) || "";
-        }
-    }, {
-        key: "getCategory",
-        value: function getCategory() {
-            return (0, _plowJs.$get)("category", this.props.formattingUnderCursor) || "";
-        }
-    }, {
-        key: "getInteractiontype",
-        value: function getInteractiontype() {
-            return (0, _plowJs.$get)("interactiontype", this.props.formattingUnderCursor) || "";
-        }
-    }, {
-        key: "render",
-        value: function render() {
-            return (0, _plowJs.$get)('linkEditor', this.props.linkingOptions) ? _react2.default.createElement(
-                "div",
-                { style: { flexGrow: 1 } },
-                _react2.default.createElement(
-                    "div",
-                    { style: { padding: 8 } },
-                    "Interaction Type",
-                    _react2.default.createElement(_reactUiComponents.SelectBox, {
-                        options: interactiontypeOptions,
-                        optionValueField: "label",
-                        value: this.getInteractiontype(),
-                        onValueChange: function onValueChange(value) {
-                            (0, _neosUiCkeditor5Bindings.executeCommand)("interactiontype", value, false);
-                        },
-                        placeholder: "Choose interactiontype",
-                        allowEmpty: true
-                    })
-                ),
-                _react2.default.createElement(
-                    "div",
-                    { style: { padding: 8 } },
-                    "Category",
-                    _react2.default.createElement(_reactUiComponents.SelectBox, {
-                        options: categoryOptions,
-                        optionValueField: "label",
-                        value: this.getCategory(),
-                        onValueChange: function onValueChange(value) {
-                            (0, _neosUiCkeditor5Bindings.executeCommand)("category", value, false);
-                        },
-                        placeholder: "Choose category",
-                        allowEmpty: true
-                    })
-                ),
-                _react2.default.createElement(
-                    "div",
-                    { style: { padding: 8 } },
-                    "Location",
-                    _react2.default.createElement(_reactUiComponents.SelectBox, {
-                        options: locationOptions,
-                        optionValueField: "label",
-                        value: this.getLocation(),
-                        onValueChange: function onValueChange(value) {
-                            (0, _neosUiCkeditor5Bindings.executeCommand)("location", value, false);
-                        },
-                        placeholder: "Choose location",
-                        allowEmpty: true
-                    })
-                )
-            ) : null;
-        }
-    }]);
-
-    return LinkEditorOptions;
-}(_react.PureComponent), _class2.propTypes = {
-    formattingUnderCursor: _propTypes2.default.object,
-    linkingOptions: _propTypes2.default.object
-}, _temp)) || _class);
-exports.default = LinkEditorOptions;
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _readFromConsumerApi = __webpack_require__(0);
-
-var _readFromConsumerApi2 = _interopRequireDefault(_readFromConsumerApi);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-module.exports = (0, _readFromConsumerApi2.default)('vendor')().React;
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _readFromConsumerApi = __webpack_require__(0);
-
-var _readFromConsumerApi2 = _interopRequireDefault(_readFromConsumerApi);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-module.exports = (0, _readFromConsumerApi2.default)('vendor')().PropTypes;
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _readFromConsumerApi = __webpack_require__(0);
-
-var _readFromConsumerApi2 = _interopRequireDefault(_readFromConsumerApi);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-module.exports = (0, _readFromConsumerApi2.default)('vendor')().reactRedux;
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _readFromConsumerApi = __webpack_require__(0);
-
-var _readFromConsumerApi2 = _interopRequireDefault(_readFromConsumerApi);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-module.exports = (0, _readFromConsumerApi2.default)('NeosProjectPackages')().ReactUiComponents;
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _readFromConsumerApi = __webpack_require__(0);
-
-var _readFromConsumerApi2 = _interopRequireDefault(_readFromConsumerApi);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-module.exports = (0, _readFromConsumerApi2.default)('NeosProjectPackages')().CkEditorApi;
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _readFromConsumerApi = __webpack_require__(0);
-
-var _readFromConsumerApi2 = _interopRequireDefault(_readFromConsumerApi);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-module.exports = (0, _readFromConsumerApi2.default)('NeosProjectPackages')().NeosUiReduxStore;
-
-/***/ }),
-/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -937,6 +711,267 @@ var RemoveAttributeCommand = function (_Command) {
 }(_ckeditor5Exports.Command);
 
 exports.default = RemoveAttributeCommand;
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _dec, _class, _class2, _temp2;
+
+var _react = __webpack_require__(15);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(16);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactRedux = __webpack_require__(17);
+
+var _plowJs = __webpack_require__(2);
+
+var _reactUiComponents = __webpack_require__(18);
+
+var _neosUiCkeditor5Bindings = __webpack_require__(19);
+
+var _neosUiReduxStore = __webpack_require__(20);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var categoryOptions = [{ group: 'foo', label: 'bar' }, { group: 'baz', label: 'baz' }];
+
+var locationOptions = [{ group: 'foo', label: 'bar' }, { group: 'baz', label: 'baz' }];
+
+var LinkEditorOptions = (_dec = (0, _reactRedux.connect)((0, _plowJs.$transform)({
+    formattingUnderCursor: _neosUiReduxStore.selectors.UI.ContentCanvas.formattingUnderCursor
+})), _dec(_class = (_temp2 = _class2 = function (_PureComponent) {
+    _inherits(LinkEditorOptions, _PureComponent);
+
+    function LinkEditorOptions() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
+        _classCallCheck(this, LinkEditorOptions);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = LinkEditorOptions.__proto__ || Object.getPrototypeOf(LinkEditorOptions)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+            options: [],
+            loading: false,
+            error: false
+        }, _this.fetchCache = null, _this.fetchOptions = function () {
+            if (!_this.fetchCache) {
+                _this.fetchCache = fetch(
+                // REPLACE WITH REAL URL
+                "/_Resources/Static/test.json", { credentials: "include" }).then(function (response) {
+                    return response.json();
+                }).then(function (response) {
+                    return Object.values(response);
+                });
+            }
+            _this.fetchCache.then(function (options) {
+                return _this.setState({ options: options, loading: false, error: false });
+            }).catch(function (reason) {
+                console.error(reason);
+                // Clear cache on error
+                _this.fetchCache = undefined;
+                _this.setState({ error: true, loading: false });
+            });
+        }, _temp), _possibleConstructorReturn(_this, _ret);
+    }
+
+    _createClass(LinkEditorOptions, [{
+        key: "componentDidMount",
+        value: function componentDidMount() {
+            this.setState({ loading: true, error: false });
+            this.fetchOptions();
+        }
+    }, {
+        key: "getLocation",
+        value: function getLocation() {
+            return (0, _plowJs.$get)("location", this.props.formattingUnderCursor) || "";
+        }
+    }, {
+        key: "getCategory",
+        value: function getCategory() {
+            return (0, _plowJs.$get)("category", this.props.formattingUnderCursor) || "";
+        }
+    }, {
+        key: "getInteractiontype",
+        value: function getInteractiontype() {
+            return (0, _plowJs.$get)("interactiontype", this.props.formattingUnderCursor) || "";
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            return (0, _plowJs.$get)('linkEditor', this.props.linkingOptions) ? _react2.default.createElement(
+                "div",
+                { style: { flexGrow: 1 } },
+                _react2.default.createElement(
+                    "div",
+                    { style: { padding: 8 } },
+                    "Interaction Type",
+                    _react2.default.createElement(_reactUiComponents.SelectBox, {
+                        options: this.state.options,
+                        optionValueField: "label",
+                        value: this.getInteractiontype(),
+                        onValueChange: function onValueChange(value) {
+                            (0, _neosUiCkeditor5Bindings.executeCommand)("interactiontype", value, false);
+                        },
+                        placeholder: "Choose interactiontype",
+                        allowEmpty: true,
+                        displayLoadingIndicator: this.state.loading
+                    })
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { style: { padding: 8 } },
+                    "Category",
+                    _react2.default.createElement(_reactUiComponents.SelectBox, {
+                        options: categoryOptions,
+                        optionValueField: "label",
+                        value: this.getCategory(),
+                        onValueChange: function onValueChange(value) {
+                            (0, _neosUiCkeditor5Bindings.executeCommand)("category", value, false);
+                        },
+                        placeholder: "Choose category",
+                        allowEmpty: true
+                    })
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { style: { padding: 8 } },
+                    "Location",
+                    _react2.default.createElement(_reactUiComponents.SelectBox, {
+                        options: locationOptions,
+                        optionValueField: "label",
+                        value: this.getLocation(),
+                        onValueChange: function onValueChange(value) {
+                            (0, _neosUiCkeditor5Bindings.executeCommand)("location", value, false);
+                        },
+                        placeholder: "Choose location",
+                        allowEmpty: true
+                    })
+                )
+            ) : null;
+        }
+    }]);
+
+    return LinkEditorOptions;
+}(_react.PureComponent), _class2.propTypes = {
+    formattingUnderCursor: _propTypes2.default.object,
+    linkingOptions: _propTypes2.default.object
+}, _temp2)) || _class);
+exports.default = LinkEditorOptions;
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _readFromConsumerApi = __webpack_require__(0);
+
+var _readFromConsumerApi2 = _interopRequireDefault(_readFromConsumerApi);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+module.exports = (0, _readFromConsumerApi2.default)('vendor')().React;
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _readFromConsumerApi = __webpack_require__(0);
+
+var _readFromConsumerApi2 = _interopRequireDefault(_readFromConsumerApi);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+module.exports = (0, _readFromConsumerApi2.default)('vendor')().PropTypes;
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _readFromConsumerApi = __webpack_require__(0);
+
+var _readFromConsumerApi2 = _interopRequireDefault(_readFromConsumerApi);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+module.exports = (0, _readFromConsumerApi2.default)('vendor')().reactRedux;
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _readFromConsumerApi = __webpack_require__(0);
+
+var _readFromConsumerApi2 = _interopRequireDefault(_readFromConsumerApi);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+module.exports = (0, _readFromConsumerApi2.default)('NeosProjectPackages')().ReactUiComponents;
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _readFromConsumerApi = __webpack_require__(0);
+
+var _readFromConsumerApi2 = _interopRequireDefault(_readFromConsumerApi);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+module.exports = (0, _readFromConsumerApi2.default)('NeosProjectPackages')().CkEditorApi;
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _readFromConsumerApi = __webpack_require__(0);
+
+var _readFromConsumerApi2 = _interopRequireDefault(_readFromConsumerApi);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+module.exports = (0, _readFromConsumerApi2.default)('NeosProjectPackages')().NeosUiReduxStore;
 
 /***/ })
 /******/ ]);
